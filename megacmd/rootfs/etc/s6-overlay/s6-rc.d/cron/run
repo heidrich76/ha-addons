@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bashio
+
+PUBLISH_FILE=publish_mega_size.sh
+CRON_JOB_FOLDER=/etc/periodic/15min
+if ! bashio::fs.file_exists "$CRON_JOB_FOLDER/$PUBLISH_FILE"; then
+  bashio::log.info "Symlink to $PUBLISH_FILE does not exist, creating in: $CRON_JOB_FOLDER"
+  ln -s "/usr/local/bin/$PUBLISH_FILE" "$CRON_JOB_FOLDER/"
+fi
+
+exec crond -f

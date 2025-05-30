@@ -1,0 +1,33 @@
+#!/usr/bin/with-contenv bashio
+
+if ! bashio::services.available "mqtt"; then
+  exit 0
+fi
+
+MQTT_HOST=$(bashio::services mqtt "host")
+MQTT_PORT=$(bashio::services mqtt "port")
+MQTT_USER=$(bashio::services mqtt "username")
+MQTT_PASS=$(bashio::services mqtt "password")
+
+mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" -t "megacmd/command" | while read -r cmd; do
+  if ! mega-whoami >/dev/null 2>&1; then
+    continue
+  fi
+
+  case "$cmd" in
+  clean_local_debris)
+    bashio::log.info "Clean local debris..."
+    rm -rf /media/mega/*/.debris/*
+    rm -rf /share/*/.debris/*
+    ;;
+  clean_cloud_debris)
+    bashio::log.info "Clean cloud debris..."
+    mega-rm -r -f //bin/SyncDebris
+    ;;
+  *)
+    bashio::log.info "Unknown command: $cmd"
+    ;;
+  esac
+
+  /usr/local/bin/publish_mega_size.sh
+done

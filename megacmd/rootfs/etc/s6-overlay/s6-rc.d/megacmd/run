@@ -1,0 +1,32 @@
+#!/usr/bin/with-contenv bashio
+
+bashio::log.info "Preparing MEGAcmd server ($(uname -m))..."
+
+CONFIG_FOLDER=$(bashio::config "config_folder" "/data")
+bashio::log.info "Config folder: $CONFIG_FOLDER"
+
+if ! bashio::fs.directory_exists "$CONFIG_FOLDER"; then
+    bashio::log.error "MEGAcmd server cannot start because config folder not existing: $CONFIG_FOLDER"
+    exit 1
+fi
+
+# Generate uuid
+if ! bashio::fs.file_exists "$CONFIG_FOLDER/machine-id"; then
+    uuidgen >"$CONFIG_FOLDER/machine-id"
+fi
+if ! bashio::fs.file_exists "/etc/machine-id"; then
+    ln -s "$CONFIG_FOLDER/machine-id" "/etc/machine-id"
+fi
+
+# Check if a symlink for ~/.megaCmd exists, and create it if not
+if ! bashio::fs.directory_exists "$CONFIG_FOLDER/.megaCmd"; then
+    bashio::log.info ".megaCmd folder not existing, creating in: $CONFIG_FOLDER"
+    mkdir -p "$CONFIG_FOLDER/.megaCmd"
+fi
+if ! bashio::fs.directory_exists "$HOME/.megaCmd"; then
+    bashio::log.info "Symlink to $CONFIG_FOLDER/.megaCmd does not exist, creating in: $HOME"
+    ln -s "$CONFIG_FOLDER/.megaCmd" "$HOME/.megaCmd"
+fi
+
+# Start server
+exec mega-cmd-server --do-not-log-to-stdout
