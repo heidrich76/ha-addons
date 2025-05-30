@@ -1,4 +1,4 @@
-# Home Assistant Add-ons: Jens' repository
+# Home Assistant Add-ons by heidrich76
 
 Home Assistant is an open-source platform for automating and controlling smart home devices locally and securely from a central interface.
 
