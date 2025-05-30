@@ -6,7 +6,6 @@ image: jensheidrich76/ha-{arch}-addon-megacmd # Must be commented out for develo
 init: false
 ingress: true
 ingress_port: 7681
-panel_admin: true
 panel_icon: mdi:console
 hassio_api: true
 homeassistant_api: true
@@ -28,6 +27,6 @@ schema:
   config_folder: str
 map:
   - backup:rw
-  - config:rw
+  - homeassistant_config:rw
   - media:rw
   - share:rw
