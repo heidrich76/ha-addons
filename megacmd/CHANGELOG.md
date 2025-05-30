@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.0.xx
+## 0.1.0
 
-- Testing release
+- Initial testing release
