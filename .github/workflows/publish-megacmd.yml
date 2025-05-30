@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v4
-      - name: Publish
-        uses: ./.github/actions/publish
+        uses: actions/checkout@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
         with:
-          addon-path: megacmd
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --amd64 --aarch64 \
+            --target megacmd \
+            --docker-hub jensheidrich76
