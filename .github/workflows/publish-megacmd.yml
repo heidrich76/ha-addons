@@ -8,6 +8,9 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/publish
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: Publish
+        uses: ./.github/actions/publish
         with:
           addon-path: megacmd
