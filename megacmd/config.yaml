@@ -1,6 +1,6 @@
 name: MEGAcmd
 description: Command line access to MEGA cloud storage via MEGAcmd
-version: 0.1.0
+version: 0.1.1
 slug: megacmd
 image: jensheidrich76/ha-{arch}-addon-megacmd # Must be commented out for development mit container
 init: false
