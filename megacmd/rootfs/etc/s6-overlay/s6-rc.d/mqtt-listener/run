@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
 
 if ! bashio::services.available "mqtt"; then
   exit 0
@@ -17,17 +18,28 @@ mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" -t
   case "$cmd" in
   clean_local_debris)
     bashio::log.info "Clean local debris..."
-    rm -rf /media/mega/*/.debris/*
-    rm -rf /share/*/.debris/*
+
+    # Use for loop, because direct call of find caused errors
+    FOLDERS=(/media /homeassistant /config /backup /share)
+    for folder in "${FOLDERS[@]}"; do
+      if [ -d "$folder" ]; then
+        find "$folder" -type d -name ".debris" -exec rm -rf {} + 2>/dev/null
+      fi
+    done
+
+    /usr/local/bin/publish_mega_size.sh
     ;;
+
   clean_cloud_debris)
     bashio::log.info "Clean cloud debris..."
     mega-rm -r -f //bin/SyncDebris
+    /usr/local/bin/publish_mega_size.sh
     ;;
+
   *)
     bashio::log.info "Unknown command: $cmd"
     ;;
+
   esac
 
-  /usr/local/bin/publish_mega_size.sh
 done

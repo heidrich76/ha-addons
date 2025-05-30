@@ -1,52 +1,86 @@
-# Home Assistent Add-on: MEGAcmd
+# Home Assistant Add-on: MEGAcmd
 
-The addon provides a recent version of [MEGAcmd](https://github.com/meganz/MEGAcmd/), which was specifically built for this project on [GitHub](https://github.com/heidrich76/megacmd-alpine).
-You may interact with MEGAcmd via a web-based Bash shell.
-This is work in progress. The files are just provided as-is. Use them at your own risk.
+This add-on provides a recent build of [MEGAcmd](https://github.com/meganz/MEGAcmd), specifically compiled for this project on [GitHub](https://github.com/heidrich76/megacmd-alpine).
+You can interact with MEGAcmd via a web-based Bash shell.
+
+> ⚠️ **Work in progress**: This add-on is provided _as-is_. Use at your own risk.
 
 ## Installation
 
-Follow these steps to get the add-on installed on your system:
+To install the add-on:
 
-1. This add-on is only visible to "Advanced Mode" users. To enable advanced mode, go to **Profile** -> and turn on **Advanced Mode**.
-2. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
-3. Find the "Terminal & SSH" add-on and click it.
-4. Click on the "INSTALL" button.
+1. Add the [GitHub repository](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fheidrich76%2Fha-addons) to your Home Assistant add-on repositories.
+2. In the Home Assistant frontend, go to **Settings** → **Add-ons** → **Add-on Store**.
+3. Locate the "MEGAcmd" add-on and open it.
+4. Click **INSTALL**.
 
-## How to use
+## Usage
 
-- After installation, the add-on offers a shell and allows for running standard MEGAcmd commands
-- It provides access to the following Home Assistant folders: `/media`, `/backup`, `/share`, and `/config`
-- Some basic usage examples:
-  - Login: Run `mega-cmd`, type `login <username>`, enter password, and the `exit`
-  - In order to use `mega-sync`, machine needs a unique identifier: `uuidgen > /etc/machine-id`
-  - Synchronizing folders: Run `mega-sync <local folder> <MEGA folder>`
-  - Mount MEGA folder: Run `mega-fuse-add <mount point> <MEGA folder>`
-  - Serve MEGA folder/file via WebDAV: `mega-webdav <MEGA folder/file> --public`
-    - Allows access from outside container
-    - Addon is configured to deliver WebDAV on port `54443`
-    - Example access via home assistant `http://homeassistant.local:54443/<id>/<MEGA folder/file>` (`id` is displayed when command is initiated)
-  - [Complete MEGAcmd user guide](https://github.com/meganz/MEGAcmd/blob/master/UserGuide.md)
+After installation, the add-on allows you to run standard MEGAcmd commands via a built-in shell. It provides access to the following folders in Home Assistant:
 
-## MEGAcmd add-on sensors
+- `/media`
+- `/backup`
+- `/share`
+- `/config` (or `homeassistant` in newer installations)
 
-- If a local MQTT server is running on Home Assistant, the addon automatically provides device `MEGA Cloud`
-- `MEGA Cloud` comes with two sensors:
-  - **Cloud Debris Size**: Size in MB of the trash folder in the MEGA cloud storage
-  - **Local Debris Size**: Size in MB of the local trash folders in synchronized folders
+### Basic Commands
 
-## Sending commands to the add-on
+- **Login to MEGA:**
 
-You may send commands to the add-on via MQTT:
+  ```bash
+  mega-cmd
+    login <username>
+    # enter password (may take a while) and then
+    exit
+  ```
 
-- Cleaning cloud debris folders:
+- **Synchronize folders:**
+
+  ```bash
+  mega-sync <local-folder> <mega-folder>
+  ```
+
+- **Mount MEGA folder via FUSE:**
+
+  ```bash
+  mega-fuse-add <mount-point> <mega-folder>
+  ```
+
+- **Serve MEGA folder or file via WebDAV:**
+
+  ```bash
+  mega-webdav <mega-folder-or-file> --public
+  ```
+
+  - Exposes content on port `54443`
+  - Accessible from outside the container
+  - Example: `http://homeassistant.local:54443/<id>/<mega-path>`
+  - The `<id>` is displayed when the command runs
+
+🔗 [Full MEGAcmd User Guide](https://github.com/meganz/MEGAcmd/blob/master/UserGuide.md)
+
+## Sensors
+
+If a local MQTT broker is running on your Home Assistant instance, the add-on automatically creates a virtual device `MEGA Cloud` with two sensors:
+
+- **Cloud Debris Size**: Size (MB) of the trash folder in MEGA cloud storage
+- **Local Debris Size**: Size (MB) of local trash folders in synchronized directories
+
+## MQTT Control
+
+You can control the add-on via MQTT by sending the following commands:
+
+- **Clean cloud trash:**
+
   ```yaml
   action: mqtt.publish
   data:
     topic: "megacmd/command"
     payload: "clean_cloud_debris"
   ```
-- Cleaning local debris folders:
+
+- **Clean local trash:**
+
   ```yaml
   action: mqtt.publish
   data:
