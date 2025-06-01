@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Use apk instead of `tar.gz`
+- Corrected logo and icon files
+
 ## 0.1.3
 
 - Corrected calculation and deletion of local debris folders

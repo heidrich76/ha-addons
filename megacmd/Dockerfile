@@ -1,17 +1,14 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-# Add packages for MEGAcmd
-RUN apk add --no-cache bash fuse gcompat git nano util-linux zstd
-
 # Add packages for addon
-RUN apk add --no-cache ttyd mosquitto-clients 
+RUN apk add --no-cache bash nano ttyd mosquitto-clients
 
 # Get MEGAcmd release from Github
-ENV VERSION=v2.1.1b2
+ENV VERSION=v2.1.1b3
 ENV BASE_URL=https://github.com/heidrich76/megacmd-alpine/releases/download/${VERSION}
-RUN wget "${BASE_URL}/megacmd_alpine_${VERSION}_$(uname -m).tar.gz" -O /tmp/megacmd.tar.gz && \
-  tar -xzf /tmp/megacmd.tar.gz -C / && rm /tmp/megacmd.tar.gz
+RUN wget "${BASE_URL}/megacmd_alpine_${VERSION}_$(uname -m).apk" -O /tmp/megacmd.apk && \
+  apk add --no-cache --allow-untrusted /tmp/megacmd.apk && rm /tmp/megacmd.apk
 
 WORKDIR /data
 
