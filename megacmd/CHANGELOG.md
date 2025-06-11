@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Updated megacmd-gui to 0.1.5
+
 ## 0.1.5
 
 - Added initial NiceGUI interface instead of ttyd

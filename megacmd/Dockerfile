@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM jensheidrich76/megacmd-gui:v0.1.4 AS gui
+FROM jensheidrich76/megacmd-gui:v0.1.5 AS gui
 FROM ${BUILD_FROM}
 
 # Add gui
