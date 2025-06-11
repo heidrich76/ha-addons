@@ -16,7 +16,10 @@ To install the add-on:
 
 ## Usage
 
-After installation, the add-on allows you to run standard MEGAcmd commands via a built-in shell. It provides access to the following folders in Home Assistant:
+After installation, the add-on allows you to run standard MEGAcmd commands via a built-in shell.
+Since version 1.5, a NiceGUI-based web interface can be used in addition to the terminal. See [here](https://github.com/heidrich76/megacmd-gui) for more information.
+
+It provides access to the following folders in Home Assistant:
 
 - `/media`
 - `/backup`

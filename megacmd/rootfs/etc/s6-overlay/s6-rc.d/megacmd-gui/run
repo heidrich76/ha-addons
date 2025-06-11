@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+bashio::log.info "Starting MEGAcmd user interface..."
+
+export PATH_PREFIX="$(bashio::addon.ingress_entry)"
+bashio::log.info "Ingress path: $PATH_PREFIX"
+
+CONFIG_FOLDER=$(bashio::config "config_folder" "/data")
+if ! bashio::fs.directory_exists "$CONFIG_FOLDER"; then
+    exit 1
+fi
+
+export PATH="/venv/bin:$PATH"
+export NICEGUI_STORAGE_PATH="$CONFIG_FOLDER/.nicegui"
+bashio::log.info "NiceGUI storage folder: $NICEGUI_STORAGE_PATH"
+
+cd "/opt/megacmd-gui"
+exec python3 main.py --port 8080 --root_path "$PATH_PREFIX"

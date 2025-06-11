@@ -1,11 +1,11 @@
 name: MEGAcmd
 description: Command line access to MEGA cloud storage via MEGAcmd
-version: 0.1.4
+version: 0.1.5
 slug: megacmd
 image: ghcr.io/heidrich76/ha-{arch}-addon-megacmd # Must be commented out for development mit container
 init: false
 ingress: true
-ingress_port: 7681
+ingress_port: 8080
 panel_icon: mdi:console
 hassio_api: true
 homeassistant_api: true

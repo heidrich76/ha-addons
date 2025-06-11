@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# shellcheck shell=bash
-
-bashio::log.info "Starting terminal..."
-cd /root
-exec ttyd -p 7681 -W -d 0 /bin/bash -l

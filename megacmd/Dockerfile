@@ -1,8 +1,14 @@
 ARG BUILD_FROM
+FROM jensheidrich76/megacmd-gui:v0.1.4 AS gui
 FROM ${BUILD_FROM}
 
+# Add gui
+RUN apk add --no-cache bash wget uuidgen python3
+COPY --from=gui /venv /venv
+COPY --from=gui /opt/megacmd-gui opt/megacmd-gui
+
 # Add packages for addon
-RUN apk add --no-cache bash nano ttyd mosquitto-clients
+RUN apk add --no-cache nano mosquitto-clients
 
 # Get MEGAcmd release from Github
 ENV VERSION=v2.1.1b3

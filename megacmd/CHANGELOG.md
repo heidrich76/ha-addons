@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Added initial NiceGUI interface instead of ttyd
+
 ## 0.1.4
 
 - Use apk instead of `tar.gz`
