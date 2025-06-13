@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Updated megacmd-gui to 0.1.6
+
 ## 0.1.6
 
 - Updated megacmd-gui to 0.1.5
