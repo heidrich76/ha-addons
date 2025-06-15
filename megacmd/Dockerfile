@@ -1,9 +1,9 @@
 ARG BUILD_FROM
-FROM jensheidrich76/megacmd-gui:v0.1.6 AS gui
+FROM jensheidrich76/megacmd-gui:v0.1.7 AS gui
 FROM ${BUILD_FROM}
 
 # Add gui
-RUN apk add --no-cache bash wget uuidgen python3
+RUN apk add --no-cache bash wget uuidgen python3 tmux
 COPY --from=gui /venv /venv
 COPY --from=gui /opt/megacmd-gui opt/megacmd-gui
 
