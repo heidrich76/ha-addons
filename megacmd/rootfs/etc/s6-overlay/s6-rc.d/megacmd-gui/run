@@ -11,15 +11,17 @@ if ! bashio::fs.directory_exists "$CONFIG_FOLDER"; then
     exit 1
 fi
 
+export PATH="/venv/bin:$PATH"
+
+# Start pty and tmux
 export TERM=screen-256color
 export LANG=C.UTF-8
 export LC_CTYPE=UTF-8
 export SESSION="default"
 
-exec 0<> /dev/pts/0
-tmux -u new-session -d -s "$SESSION"
+tmux -u new-session -d -s "$SESSION" -c /media
 
-export PATH="/venv/bin:$PATH"
+# Start NiceGUI
 export NICEGUI_STORAGE_PATH="$CONFIG_FOLDER/.nicegui"
 bashio::log.info "NiceGUI storage folder: $NICEGUI_STORAGE_PATH"
 

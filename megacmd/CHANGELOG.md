@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.10
+
+- Fixed tmux issue accessing default PTY
+
 ## 0.1.9
 
 - Updated megacmd-gui to 0.1.8
