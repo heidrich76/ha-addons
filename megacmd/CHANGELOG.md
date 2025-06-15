@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.9
+
+- Updated megacmd-gui to 0.1.8
+- Fixed tmux issue
+
 ## 0.1.8
 
 - Updated megacmd-gui to 0.1.7
