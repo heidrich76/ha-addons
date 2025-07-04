@@ -33,6 +33,7 @@ mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" -t
   clean_cloud_debris)
     bashio::log.info "Clean cloud debris..."
     mega-rm -r -f //bin/SyncDebris
+    mega-mkdir //bin/SyncDebris
     /usr/local/bin/publish_mega_size.sh
     ;;
 

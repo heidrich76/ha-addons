@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- Correct bug removing cloud sync debris
+
 ## 0.1.10
 
 - Fixed tmux issue accessing default PTY
