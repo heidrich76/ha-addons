@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.1.12
+
+- Bumped megacmd-gui to `v0.1.10`
+- Reverted NiceGUI back to `2.20.0` because of refresh bug
+
 ## 0.1.11
 
 - Correct bug removing cloud sync debris
