@@ -12,18 +12,12 @@ if ! bashio::fs.directory_exists "$CONFIG_FOLDER"; then
 fi
 
 export PATH="/venv/bin:$PATH"
-
-# Start pty and tmux
-export TERM=screen-256color
 export LANG=C.UTF-8
 export LC_CTYPE=UTF-8
-export SESSION="default"
-
-tmux -u new-session -d -s "$SESSION" -c /media
 
 # Start NiceGUI
 export NICEGUI_STORAGE_PATH="$CONFIG_FOLDER/.nicegui"
 bashio::log.info "NiceGUI storage folder: $NICEGUI_STORAGE_PATH"
 
 cd "/opt/megacmd-gui"
-exec python3 main.py --port 8080 --root_path "$PATH_PREFIX"
+exec python3 main.py --port 8080

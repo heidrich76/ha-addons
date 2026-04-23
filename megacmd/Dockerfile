@@ -1,6 +1,5 @@
-ARG BUILD_FROM
 FROM jensheidrich76/megacmd-gui:v0.2.0 AS gui
-FROM ${BUILD_FROM}
+FROM ghcr.io/home-assistant/base:latest
 
 # Add gui
 RUN apk add --no-cache bash wget uuidgen python3

@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.2.1
+
+- Removed tmux
+- Migrated to new base image
+
 # 0.2.0
 
 - Updated dependencies
