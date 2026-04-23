@@ -1,6 +1,6 @@
 # Changelog
 
-# 0.1.12
+# 0.2.0
 
 - Updated dependencies
 - Bumped megacmd-gui to `v0.2.0`
