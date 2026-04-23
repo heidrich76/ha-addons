@@ -1,6 +1,6 @@
 name: MEGAcmd
 description: Command line access to MEGA cloud storage via MEGAcmd
-version: 0.2.1
+version: 0.2.2
 slug: megacmd
 image: ghcr.io/heidrich76/ha-{arch}-addon-megacmd # Must be commented out for development mit container
 init: false
@@ -20,7 +20,7 @@ devices:
 services:
   - mqtt:want
 ports:
-  4443/tcp: 54443
+  8080/tcp: 58080
 options:
   config_folder: /data
 schema:
