@@ -1,4 +1,4 @@
-FROM jensheidrich76/megacmd-gui:v0.2.0 AS gui
+FROM jensheidrich76/megacmd-gui:v0.2.1 AS gui
 FROM ghcr.io/home-assistant/base:latest
 
 # Add gui

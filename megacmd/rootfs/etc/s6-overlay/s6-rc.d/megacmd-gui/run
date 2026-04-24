@@ -20,4 +20,4 @@ export NICEGUI_STORAGE_PATH="$CONFIG_FOLDER/.nicegui"
 bashio::log.info "NiceGUI storage folder: $NICEGUI_STORAGE_PATH"
 
 cd "/opt/megacmd-gui"
-exec python3 main.py --port 8080
+exec python3 main.py --port 8080 --root_path "$PATH_PREFIX"

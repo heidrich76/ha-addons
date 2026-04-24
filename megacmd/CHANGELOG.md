@@ -1,5 +1,11 @@
 # Changelog
 
+# 0.2.3
+- Opened port `54443` again for WebDAV access
+- Reintroduced `root_path`argument for Ingress
+- Added warning message for calling `mega-sync` too quickly
+- Bumped megacmd-gui to `v0.2.1`
+
 # 0.2.2
 
 - Open Port 58080 for NiceGUI (as Ingress is currently not working with NiceGUI 3.10)
