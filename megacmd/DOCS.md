@@ -1,7 +1,7 @@
 # Home Assistant Add-on: MEGAcmd
 
 This add-on provides a recent build of [MEGAcmd](https://github.com/meganz/MEGAcmd), specifically compiled for this project on [GitHub](https://github.com/heidrich76/megacmd-alpine).
-You can interact with MEGAcmd via a web-based Bash shell.
+You can interact with MEGAcmd via a web-based user interface.
 
 > ⚠️ **Work in progress**: This add-on is provided _as-is_. Use at your own risk.
 
